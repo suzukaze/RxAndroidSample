@@ -3,7 +3,7 @@ This appli shows [epitome](https://ja.epitomeup.com/) title using RxAndroid, Ret
 
 ## License
 
-gfx This appli use EpitomeBeam, EpitomeEntry class in [Android-Helium](https://github.com/gfx/Android-Helium)
+gfx : This appli use EpitomeBeam, EpitomeEntry class in [Android-Helium](https://github.com/gfx/Android-Helium)
 
 Jun Hiroe
 
