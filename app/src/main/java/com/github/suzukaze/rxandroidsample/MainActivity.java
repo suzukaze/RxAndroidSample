@@ -49,7 +49,6 @@ public class MainActivity extends ActionBarActivity {
         EpitomeBeam epitomeBeam = empitomeBeamService.getBeam();
         for (EpitomeEntry epitomeEntry : epitomeBeam.sources) {
           subscriber.onNext(epitomeEntry);
-          android.util.Log.d(TAG, epitomeEntry.title);
         }
         subscriber.onCompleted();
       }
