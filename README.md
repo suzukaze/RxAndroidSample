@@ -1,9 +1,11 @@
 ## RxAndroidSample
 This appli shows [epitome](https://ja.epitomeup.com/) title using RxAndroid, Retrofit, OkHttp, and Gson.
 
+![RxAndroidSampleScreenshot.png](RxAndroidSampleScreenshot.png)
+
 ## License
 
-gfx : This appli use EpitomeBeam, EpitomeEntry class in [Android-Helium](https://github.com/gfx/Android-Helium)
+gfx : This appli uses EpitomeBeam and EpitomeEntry class in [Android-Helium](https://github.com/gfx/Android-Helium)
 
 Jun Hiroe
 
