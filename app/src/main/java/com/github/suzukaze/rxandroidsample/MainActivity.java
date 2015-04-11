@@ -61,8 +61,7 @@ public class MainActivity extends ActionBarActivity {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Observer<EpitomeEntry>() {
           @Override
-          public void onNext(EpitomeEntry
-                                 epitomeEntry) {
+          public void onNext(EpitomeEntry epitomeEntry) {
             titles.add(epitomeEntry.title);
           }
 
