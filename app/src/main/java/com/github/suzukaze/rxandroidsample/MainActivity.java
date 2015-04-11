@@ -41,9 +41,9 @@ public class MainActivity extends ActionBarActivity {
 
     final MainActivity finalMainActivity = this;
 
-    Observable observable = Observable.create(new Observable.OnSubscribe<EpitomeEntry>() {
+    Observable observable = Observable.create(new Observable.OnSubscribe<Integer>() {
       @Override
-      public void call(Subscriber<? super EpitomeEntry> subscriber) {
+      public void call(Subscriber<? super Integer> subscriber) {
         EmpitomeBeamService empitomeBeamService = ServiceGenerator.createService(
             EmpitomeBeamService.class, EmpitomeBeamService.ENDPOINT);
         EpitomeBeam epitomeBeam = empitomeBeamService.getBeam();
