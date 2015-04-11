@@ -78,8 +78,6 @@ public class MainActivity extends ActionBarActivity {
           public void onError(Throwable e) {
           }
         });
-
-
   }
 
 
