@@ -19,6 +19,7 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.android.view.ViewObservable;
 import rx.schedulers.Schedulers;
 
 
@@ -36,10 +37,11 @@ public class MainActivity extends ActionBarActivity {
 
     titles = new ArrayList<>();
 
+    listView = (ListView) findViewById(R.id.listView);
+
     final MainActivity finalMainActivity = this;
 
-    Observable.create(new Observable.OnSubscribe<EpitomeEntry>() {
-
+    Observable observable = Observable.create(new Observable.OnSubscribe<EpitomeEntry>() {
       @Override
       public void call(Subscriber<? super EpitomeEntry> subscriber) {
         EmpitomeBeamService empitomeBeamService = ServiceGenerator.createService(
@@ -52,28 +54,31 @@ public class MainActivity extends ActionBarActivity {
         subscriber.onCompleted();
       }
     })
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
-      .subscribe(new Observer<EpitomeEntry>() {
-        @Override
-        public void onNext (EpitomeEntry
-        epitomeEntry){
-          titles.add(epitomeEntry.title);
-        }
+        .subscribeOn(Schedulers.io());
 
-        @Override
-        public void onCompleted () {
-          ArrayAdapter<String> adapter = new ArrayAdapter(finalMainActivity,
-              android.R.layout.simple_expandable_list_item_1, titles);
-          listView.setAdapter(adapter);
-        }
+    ViewObservable.bindView(listView, observable);
 
-        @Override
-        public void onError (Throwable e){
-        }
-      });
+    observable
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Observer<EpitomeEntry>() {
+          @Override
+          public void onNext(EpitomeEntry
+                                 epitomeEntry) {
+            titles.add(epitomeEntry.title);
+          }
 
-      listView = (ListView) findViewById(R.id.listView);
+          @Override
+          public void onCompleted() {
+            ArrayAdapter<String> adapter = new ArrayAdapter(finalMainActivity,
+                android.R.layout.simple_expandable_list_item_1, titles);
+            listView.setAdapter(adapter);
+          }
+
+          @Override
+          public void onError(Throwable e) {
+          }
+        });
+
 
   }
 
