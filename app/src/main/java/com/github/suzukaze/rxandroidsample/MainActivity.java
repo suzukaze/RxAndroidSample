@@ -41,15 +41,17 @@ public class MainActivity extends ActionBarActivity {
 
     final MainActivity finalMainActivity = this;
 
-    Observable observable = Observable.create(new Observable.OnSubscribe<Integer>() {
+    Observable<List<String>> observable = Observable.create(new Observable.OnSubscribe<List<String>>() {
       @Override
-      public void call(Subscriber<? super Integer> subscriber) {
+      public void call(Subscriber<? super List<String>> subscriber) {
         EmpitomeBeamService empitomeBeamService = ServiceGenerator.createService(
             EmpitomeBeamService.class, EmpitomeBeamService.ENDPOINT);
         EpitomeBeam epitomeBeam = empitomeBeamService.getBeam();
+        List<String> t = new ArrayList<>(epitomeBeam.sources.size());
         for (EpitomeEntry epitomeEntry : epitomeBeam.sources) {
-          titles.add(epitomeEntry.title);
+          t.add(epitomeEntry.title);
         }
+        subscriber.onNext(t);
         subscriber.onCompleted();
       }
     })
@@ -59,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
 
     observable
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<Integer>() {
+        .subscribe(new Observer<List<String>>() {
           @Override
           public void onCompleted() {
             ArrayAdapter<String> adapter = new ArrayAdapter(finalMainActivity,
@@ -72,7 +74,8 @@ public class MainActivity extends ActionBarActivity {
           }
 
           @Override
-          public void onNext(Integer progress) {
+          public void onNext(List<String> progress) {
+            titles.addAll(progress);
           }
         });
   }
