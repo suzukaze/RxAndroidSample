@@ -74,8 +74,8 @@ public class MainActivity extends ActionBarActivity {
           }
 
           @Override
-          public void onNext(List<String> progress) {
-            titles.addAll(progress);
+          public void onNext(List<String> titleArray) {
+            titles.addAll(titleArray);
           }
         });
   }
